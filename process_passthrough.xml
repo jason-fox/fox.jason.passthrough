@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!--ant--><!--
+	This file is part of the DITA-OT Passthrough Plug-in project.
+	See the accompanying LICENSE file for applicable licenses.
+--><project xmlns:dita="http://dita-ot.sourceforge.net" name="fox.jason.passthrough">
+
+
+	<target name="passthrough.init" depends="">
+		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
+	</target>
+
+	<target name="passthrough.process" depends="passthrough-copy,run-pandoc"/>
+
+    <target name="passthrough-copy">
+    	<macrodef name="copy-file">
+			<attribute name="src"/>
+			<attribute name="dest"/>
+			<sequential>
+				<copy file="@{src}" tofile="@{dest}" overwrite="true"/>
+			</sequential>
+		</macrodef>
+		<passthrough-iterate format="passthrough" macro="copy-file"/>
+    </target>
+
+	<target name="passthrough" depends="passthrough.init,passthrough.process"/>
+</project>

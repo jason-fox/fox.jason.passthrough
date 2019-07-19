@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--ant-->
+<!--
+	This file is part of the DITA-OT Passthrough Plug-in project.
+	See the accompanying LICENSE file for applicable licenses.
+-->
+<antlib xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+		<!--
+		Removes a prefix from a file
+
+		@param  string -   The value to convert
+		@param  to -  The property to set
+	-->
+	<scriptdef language="javascript" name="strip-prefix" src="${dita.plugin.fox.jason.passthrough.dir}/resource/strip-prefix.js">
+		<attribute name="string" />
+		<attribute name="to" />
+	</scriptdef>
+
+	<!--
+		Run a given macro against an input and output
+
+		@param macro - A macro to run.
+		@param src - A set of files
+		@param dest - The input directory
+	-->
+	<scriptdef language="javascript" name="passthrough-task" src="${dita.plugin.fox.jason.passthrough.dir}/resource/execute-task.js">
+		<attribute name="macro" />
+		<attribute name="src" />
+		<attribute name="dest" />
+	</scriptdef>
+
+	
+	<macrodef name="passthrough-iterate">
+		<attribute name="format" />
+		<attribute name="macro" />
+		<sequential>
+			<xmltask taskname="read-job.xml" source="${dita.temp.dir}${file.separator}.job.xml">
+				<call path="//file[@format='@{format}']">
+					<param default="" name="path" path="@path"/>
+					<param default="" name="result" path="@result"/>
+					<actions>
+						<local name="dest"/>
+						<local name="src"/>
+						<property name="dest" value="${dita.temp.dir}${file.separator}@{path}"/>
+						<strip-prefix string="@{result}" to="src"/>
+						<passthrough-task src="${src}" dest="${dest}" macro="@{macro}"/>
+					</actions>
+				</call>
+			</xmltask>
+		</sequential>
+	</macrodef>
+
+
+</antlib>
