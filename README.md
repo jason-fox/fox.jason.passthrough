@@ -116,7 +116,8 @@ The following `plugin.xml` will enable the post-processing of all files marked a
 </project>
 ```
 
-A working example of [DITA-OT Pandoc plug-in](https://github.com/jason-fox/fox.jason.pandoc)
+A working example can be found in the [DITA-OT Pandoc plug-in](https://github.com/jason-fox/fox.jason.pandoc)
+repository.
 
 # API
 
@@ -133,13 +134,16 @@ Post process all files of a given format using the macro supplied
 | Attribute | Description                                      | Required |
 | --------- | ------------------------------------------------ | -------- |
 | format    | The `format` attribute used with the `*.ditamap` | Yes      |
-| macro     | The name of rhe `<macrodef>` to run              | Yes      |
+| macro     | The name of the `<macrodef>` to run              | Yes      |
 
 #### Example
 
 ```xml
  <passthrough-iterate format="NEW_FORMAT" macro="do-something"/>
 ```
+
+Files marked as `format="NEW_FORMAT"` should be processed by the `macrodef` called `do-something`. The macro must offer
+an interface with both `src` and `dest` attributes.
 
 # License
 
