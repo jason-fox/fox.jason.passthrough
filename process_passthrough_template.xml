@@ -9,6 +9,10 @@
 		dita:depends="{fox.jason.passthrough.pre}"
      	dita:extension="depends org.dita.dost.platform.InsertDependsAction">
 		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
+
+		<fileset id="passthrough.ditamaps" dir="${dita.temp.dir}">
+			<include name="**/*.ditamap"/>
+		</fileset>
 	</target>
 
 	<target name="passthrough.process"

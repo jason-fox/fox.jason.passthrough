@@ -84,7 +84,6 @@
 						<dirname property="ditamap.dir" file="${ditamap}"/>
 
 						<property name="result" value="file:${ditamap.dir}${file.separator}@{href}"/>
-						<echo level="error" message="${result}"/>
 
 						<xmltask taskname="read-job.xml" source="${dita.temp.dir}${file.separator}.job.xml">
 							<call path="//file[@result='${result}']">

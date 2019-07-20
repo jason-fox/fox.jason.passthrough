@@ -6,19 +6,19 @@
 
 	<target name="passthrough.init" depends="">
 		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
+
+		<fileset id="passthrough.ditamaps" dir="${dita.temp.dir}">
+			<include name="**/*.ditamap"/>
+		</fileset>
 	</target>
 
 	<target name="passthrough.process" depends="passthrough-copy,run-pandoc"/>
 
     <target name="passthrough-copy">
-
-
     	<macrodef name="copy-file">
 			<attribute name="src"/>
 			<attribute name="dest"/>
 			<sequential>
-				<echo level="error" message="@{src}"/>
-				<echo level="error" message="@{dest}"/>
 				<copy file="@{src}" tofile="@{dest}" overwrite="true"/>
 			</sequential>
 		</macrodef>
