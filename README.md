@@ -3,7 +3,6 @@
 [![license](https://img.shields.io/github/license/jason-fox/fox.jason.passthrough.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![DITA-OT 3.3](https://img.shields.io/badge/DITA--OT-3.3-blue.svg)](http://www.dita-ot.org/3.3/) <br/>
 [![Build Status](https://travis-ci.org/jason-fox/fox.jason.passthrough.svg?branch=master)](https://travis-ci.org/jason-fox/fox.jason.passthrough)
-[![Coverage Status](https://coveralls.io/repos/github/jason-fox/fox.jason.passthrough/badge.svg?branch=master)](https://coveralls.io/github/jason-fox/fox.jason.passthrough?branch=master)
 
 This is an abstract base DITA-OT Plug-in to enable files to bypass DITA-OT pre-processing and be copied directly over
 into the processing directory. It is designed to be extended.
