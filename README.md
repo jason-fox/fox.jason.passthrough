@@ -55,7 +55,7 @@ rm dita-ot-3.3.zip
 
 ```console
 dita --install https://github.com/doctales/org.doctales.xmltask/archive/master.zip
-dita -install https://github.com/jason-fox/fox.jason.passthrough/archive/master.zip
+dita --install https://github.com/jason-fox/fox.jason.passthrough/archive/master.zip
 ```
 
 The `dita` command line tool requires no additional configuration.
