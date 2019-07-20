@@ -102,9 +102,18 @@ public class FileReader implements XMLReader {
 	@Override
 	public void parse(InputSource input) throws IOException, SAXException {
 		URL url = new URL(input.getSystemId());
+		String name =  url.getPath().replaceAll("_", " ");
+		if(name.contains("/")) {
+			name = name.substring(name.lastIndexOf("/") + 1, name.length());
+			if(name.contains(".")) {
+				name = name.substring(0, name.lastIndexOf("."));
+			}
+		}
+
+
 		StringBuilder sb = new StringBuilder();
-		sb.append("<topic id=\"passthrough\" class=\"- topic/topic \" domains=\"(topic abbrev-d) a(props deliveryTarget) (topic equation-d) (topic hazard-d) (topic hi-d) (topic indexing-d) (topic markup-d) (topic mathml-d) (topic pr-d) (topic relmgmt-d) (topic sw-d) (topic svg-d) (topic ui-d) (topic ut-d) (topic markup-d xml-d)\" >");
-		sb.append("<title class=\"- topic/title \">passthrough</title>");
+		sb.append("<topic id=\"" + name + "\" class=\"- topic/topic \" domains=\"(topic abbrev-d) a(props deliveryTarget) (topic equation-d) (topic hazard-d) (topic hi-d) (topic indexing-d) (topic markup-d) (topic mathml-d) (topic pr-d) (topic relmgmt-d) (topic sw-d) (topic svg-d) (topic ui-d) (topic ut-d) (topic markup-d xml-d)\" >");
+		sb.append("<title class=\"- topic/title \">" + name + "</title>");
 		sb.append("<body class=\"- topic/body \"/>");
 		sb.append("</topic>");
 		//Delegate to content handler.
