@@ -19,7 +19,7 @@
 	<!--
 		Run a given macro against an input and output
 
-		@param macro - A macro to run.
+		@param macro - The name of a  macro to run.
 		@param src - A set of files
 		@param dest - The input directory
 	-->
@@ -29,11 +29,80 @@
 		<attribute name="dest" />
 	</scriptdef>
 
-	
+	<!--
+		Iterator function to run a given macro against a set of dita files
+
+		@param macro - The name of a  macro to run.
+		@param format - The format to look for in ditamaps
+	-->
 	<macrodef name="passthrough-iterate">
 		<attribute name="format" />
 		<attribute name="macro" />
 		<sequential>
+			<ditamaps-passthrough dir="${dita.temp.dir}" format="@{format}" macro="@{macro}">
+				<fileset refid="passthrough.ditamaps" />
+			</ditamaps-passthrough>
+		</sequential>
+	</macrodef>
+
+	<!--
+		Iterator function to run a given macro against a set of dita files
+
+		@param macro - The name of a  macro to run.
+		@param fileset - A set of ditamap files
+		@param dir - The input directory
+		@param format - The format to look for in ditamaps
+	-->
+	<scriptdef language="javascript" name="ditamaps-passthrough" src="${dita.plugin.fox.jason.passthrough.dir}/resource/ditamaps.js">
+		<attribute name="macro" />
+		<attribute name="format" />
+		<attribute name="dir" />
+		<element name="fileset" type="fileset"/>
+	</scriptdef>
+
+	<!--
+		Iterator function to run a given macro against a set of dita files
+
+		@param macro - The name of a  macro to run.
+		@param file - The ditamap to search
+		@param format - The format to look for in ditamaps
+	-->
+	<macrodef name="dita-passthrough">
+		<attribute name="format" />
+		<attribute name="macro" />
+		<attribute name="file" />
+		<sequential>
+			<xmltask taskname="read-ditamap" source="@{file}">
+				<call path="//*[@dita-ot:orig-format='@{format}']">
+					<param default="" name="href" path="@href"/>
+					<param default="" name="xtrf" path="@xtrf"/>
+					<actions>
+						<local name="result"/>
+						<local name="ditamap"/>
+						<local name="ditamap.dir"/>
+						<strip-prefix string="@{xtrf}" to="ditamap"/>
+						<dirname property="ditamap.dir" file="${ditamap}"/>
+
+						<property name="result" value="file:${ditamap.dir}${file.separator}@{href}"/>
+						<echo level="error" message="${result}"/>
+
+						<xmltask taskname="read-job.xml" source="${dita.temp.dir}${file.separator}.job.xml">
+							<call path="//file[@result='${result}']">
+								<param default="" name="path" path="@path"/>
+								<param default="" name="result" path="@result"/>
+								<actions>
+									<local name="dest"/>
+									<local name="src"/>
+									<property name="dest" value="${dita.temp.dir}${file.separator}@{path}"/>
+									<strip-prefix string="@{result}" to="src"/>
+									<passthrough-task src="${src}" dest="${dest}" macro="@{macro}"/>
+								</actions>
+							</call>
+						</xmltask>
+					</actions>
+				</call>
+			</xmltask>
+
 			<xmltask taskname="read-job.xml" source="${dita.temp.dir}${file.separator}.job.xml">
 				<call path="//file[@format='@{format}']">
 					<param default="" name="path" path="@path"/>
