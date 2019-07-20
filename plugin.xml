@@ -14,13 +14,8 @@
   <feature extension="depend.preprocess.post" value="passthrough"/>
   <feature extension="ant.import" file="process_passthrough.xml"/>
 
-  <extension-point id="fox.jason.passthrough.pre"
-                   name="Extended pass through pre-processing"/>
-
-  <extension-point id="fox.jason.passthrough.process"
-                   name="Extended pass through processing"/>
-
-
+  <extension-point id="fox.jason.passthrough.pre" name="Extend pass through pre-processing"/>
+  <extension-point id="fox.jason.passthrough.process" name="Extend pass through processing"/>
 
   <feature extension="fox.jason.passthrough.process" value="passthrough-copy"/>
 

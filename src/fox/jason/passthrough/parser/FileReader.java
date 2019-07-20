@@ -101,7 +101,11 @@ public class FileReader implements XMLReader {
 	
 	@Override
 	public void parse(InputSource input) throws IOException, SAXException {
-		sb.append("<topic>");
+		URL url = new URL(input.getSystemId());
+		StringBuilder sb = new StringBuilder();
+		sb.append("<topic id=\"passthrough\" class=\"- topic/topic \" domains=\"(topic abbrev-d) a(props deliveryTarget) (topic equation-d) (topic hazard-d) (topic hi-d) (topic indexing-d) (topic markup-d) (topic mathml-d) (topic pr-d) (topic relmgmt-d) (topic sw-d) (topic svg-d) (topic ui-d) (topic ut-d) (topic markup-d xml-d)\" >");
+		sb.append("<title class=\"- topic/title \">passthrough</title>");
+		sb.append("<body class=\"- topic/body \"/>");
 		sb.append("</topic>");
 		//Delegate to content handler.
 		SAXResult result = new SAXResult(handler);
