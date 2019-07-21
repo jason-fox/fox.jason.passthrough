@@ -1,8 +1,9 @@
-# Pass Through Plugin for DITA-OT
+# Pass Through Plugin for DITA-OT [<img src="https://jason-fox.github.io/fox.jason.passthrough/passthrough.png" align="right" width="300">](http://passthroughdita-ot.rtfd.io/)
 
 [![license](https://img.shields.io/github/license/jason-fox/fox.jason.passthrough.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![DITA-OT 3.3](https://img.shields.io/badge/DITA--OT-3.3-blue.svg)](http://www.dita-ot.org/3.3/) <br/>
 [![Build Status](https://travis-ci.org/jason-fox/fox.jason.passthrough.svg?branch=master)](https://travis-ci.org/jason-fox/fox.jason.passthrough)
+[![Documentation Status](https://readthedocs.org/projects/passthroughdita-ot/badge/?version=latest)](https://passthroughdita-ot.readthedocs.io/en/latest/?badge=latest)
 
 This is an abstract base DITA-OT Plug-in to enable files to bypass DITA-OT pre-processing and be copied directly over
 into the processing directory. It is designed to be extended.
@@ -11,8 +12,6 @@ The plugin consists of a no-op file reader and an Antlib library. It offers two 
 
 # Table of Contents
 
--   [Pass Through Plugin for DITA-OT](#pass-through-plugin-for-dita-ot)
--   [Table of Contents](#table-of-contents)
 -   [Install](#install)
     -   [Installing DITA-OT](#installing-dita-ot)
     -   [Installing the Plug-in](#installing-the-plug-in)
@@ -21,6 +20,7 @@ The plugin consists of a no-op file reader and an Antlib library. It offers two 
         -   [Example](#example)
 -   [API](#api)
     -   [Passthrough-Iterate](#passthrough-iterate)
+-   [License](#license)
 
 # Install
 
