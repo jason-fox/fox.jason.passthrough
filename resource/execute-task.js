@@ -12,12 +12,21 @@
 var macro = attributes.get("macro");
 var src = attributes.get("src");
 var dest = attributes.get("dest");
+var title = attributes.get("src").replace(/_/g," ");
+
+if(title.contains("/")) {
+	title = title.substring(title.lastIndexOf("/") + 1, title.length());
+	if(title.contains(".")) {
+		title = title.substring(0, title.lastIndexOf("."));
+	}
+}
 
 var task = project.createTask(macro);
  
 try {
 	task.setDynamicAttribute("src", src);
 	task.setDynamicAttribute("dest", dest);
+	task.setDynamicAttribute("title", title);
 	task.execute();
 } catch (err) {
 	task.log("Execution error: " + err.message);

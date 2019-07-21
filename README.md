@@ -108,6 +108,7 @@ The following `plugin.xml` will enable the post-processing of all files marked a
       <macrodef name="do-something">
         <attribute name="src" />
         <attribute name="dest" />
+        <attribute name="title" />
         <sequential>
           <!-- Further processing -->
         </sequential>
@@ -144,7 +145,7 @@ Post process all files of a given format using the macro supplied
 ```
 
 Files marked as `format="NEW_FORMAT"` should be processed by the `macrodef` called `do-something`. The macro must offer
-an interface with both `src` and `dest` attributes.
+an interface with `src`, `dest` and `title` attributes.
 
 # License
 
