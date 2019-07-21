@@ -17,7 +17,7 @@
   <extension-point id="fox.jason.passthrough.pre" name="Extend pass through pre-processing"/>
   <extension-point id="fox.jason.passthrough.process" name="Extend pass through processing"/>
 
-  <feature extension="fox.jason.passthrough.process" value="passthrough-copy"/>
+  <feature extension="fox.jason.passthrough.process" value="passthrough.process"/>
 
 
   <!-- Add a template file to enable overrides to use extension points -->

@@ -104,17 +104,19 @@ The following `plugin.xml` will enable the post-processing of all files marked a
 
 ```xml
 <project name="com.example.passthrough.dita">
-    <target name="run-processing">
-      <macrodef name="do-something">
-        <attribute name="src" />
-        <attribute name="dest" />
-        <attribute name="title" />
-        <sequential>
-          <!-- Further processing -->
-        </sequential>
-      </macrodef>
-      <passthrough-iterate format="NEW_FORMAT" macro="do-something"/>
-    </target>
+
+  <macrodef name="do-something">
+    <attribute name="src" />
+    <attribute name="dest" />
+    <attribute name="title" />
+    <sequential>
+      <!-- Further processing -->
+    </sequential>
+  </macrodef>
+
+  <target name="run-processing">
+    <passthrough-iterate format="NEW_FORMAT" macro="do-something"/>
+  </target>
 </project>
 ```
 

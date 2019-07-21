@@ -3,7 +3,35 @@
 	See the accompanying LICENSE file for applicable licenses.
 --><project xmlns:dita="http://dita-ot.sourceforge.net" name="fox.jason.passthrough">
 
+	<!--
+		Individual file processing for passthrough.
+		Copy an input source into the dest location
 
+		@param src - The input file to copy over
+		@param dest - The output file location
+		@param title - The title of the converted file (not used)
+	-->
+	<macrodef name="add-passthrough-file">
+		<attribute name="src"/>
+		<attribute name="dest"/>
+		<attribute name="title"/>
+		<sequential>
+			<echo taskname="passthrough" level="info" message="Processing @{src}"/>
+			<copy taskname="passthrough" file="@{src}" tofile="@{dest}" overwrite="true"/>
+		</sequential>
+	</macrodef>
+
+	<!--
+		Iterate across all files marked format="passthrough" and process them
+	-->
+	<target name="passthrough.process">
+		<passthrough-iterate format="passthrough" macro="add-passthrough-file"/>
+	</target>
+
+	<!--
+		Setting up passthrough processing. 
+		Load the library and set up the ditamap list
+	-->
 	<target name="passthrough.init" depends="">
 		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
 
@@ -12,20 +40,13 @@
 		</fileset>
 	</target>
 
-	<target name="passthrough.process" depends="passthrough-copy"/>
+	<!--
+		Extension hook for passthrough processing sub-classes to extend
+	-->
+	<target name="passthrough.extend" depends="passthrough.process"/>
 
-    <target name="passthrough-copy">
-    	<macrodef name="copy-file">
-			<attribute name="src"/>
-			<attribute name="dest"/>
-			<attribute name="title" />
-			<sequential>
-    			<echo taskname="passthrough" level="info" message="Processing @{src}"/>
-				<copy taskname="passthrough" file="@{src}" tofile="@{dest}" overwrite="true"/>
-			</sequential>
-		</macrodef>
-		<passthrough-iterate format="passthrough" macro="copy-file"/>
-    </target>
-
-	<target name="passthrough" depends="passthrough.init,passthrough.process"/>
+	<!--
+		Passthrough processing starts after preprocess has completed.
+	-->
+	<target name="passthrough" depends="passthrough.init,passthrough.extend"/>
 </project>
