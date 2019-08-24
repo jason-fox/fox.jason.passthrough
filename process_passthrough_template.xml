@@ -34,7 +34,7 @@
 		Load the library and set up the ditamap list
 	-->
 	<target name="passthrough.init"
-		dita:depends="{fox.jason.passthrough.pre}"
+		dita:depends="{passthrough.pre}"
 			dita:extension="depends org.dita.dost.platform.InsertDependsAction">
 		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
 
@@ -47,7 +47,7 @@
 		Extension hook for passthrough processing sub-classes to extend
 	-->
 	<target name="passthrough.extend"
-		dita:depends="{fox.jason.passthrough.process}"
+		dita:depends="{passthrough.process}"
 		dita:extension="depends org.dita.dost.platform.InsertDependsAction"/>
 
 	<!--

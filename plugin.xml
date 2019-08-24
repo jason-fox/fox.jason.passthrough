@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="dita-ot/plugin.rnc" type="application/relax-ng-compact-syntax"?>
-<plugin id="fox.jason.passthrough" version="1.0.0">
+<plugin id="fox.jason.passthrough" version="2.0.0">
   <feature extension="dita.conductor.lib.import" file="lib/passthrough.parser-1.0.jar"/>
   <!--
 		This plugin requires the XMLTask lib
@@ -14,10 +14,10 @@
   <feature extension="depend.preprocess.post" value="passthrough"/>
   <feature extension="ant.import" file="process_passthrough.xml"/>
 
-  <extension-point id="fox.jason.passthrough.pre" name="Extend pass through pre-processing"/>
-  <extension-point id="fox.jason.passthrough.process" name="Extend pass through processing"/>
+  <extension-point id="passthrough.pre" name="Extend pass through pre-processing"/>
+  <extension-point id="passthrough.process" name="Extend pass through processing"/>
 
-  <feature extension="fox.jason.passthrough.process" value="passthrough.process"/>
+  <feature extension="passthrough.process" value="passthrough.process"/>
 
 
   <!-- Add a template file to enable overrides to use extension points -->
