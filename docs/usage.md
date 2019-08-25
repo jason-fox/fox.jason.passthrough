@@ -17,9 +17,9 @@ The additional file will be added to the build job without processing.
 
 This plug-in is designed to be extended and offers two extension points:
 
--   `fox.jason.passthrough.pre` - Runs an additional Ant target before the passthrough pre-processing stage.
+-   `passthrough.pre` - Runs an additional Ant target before the passthrough pre-processing stage.
 
--   `fox.jason.passthrough.process` - Runs an additional Ant target as part of the passthrough processing stage.
+-   `passthrough.process` - Runs an additional Ant target as part of the passthrough processing stage.
 
 ### Example
 
@@ -29,7 +29,7 @@ The following `plugin.xml` will enable the post-processing of all files marked a
 
 ```xml
 <plugin id="com.example.passthrough.dita">
-  <feature extension="fox.jason.passthrough.process" value="run-processing"/>
+  <feature extension="passthrough.process" value="run-processing"/>
   <feature extension="dita.parser">
     <parser format="NEW_FORMAT" class="fox.jason.passthrough.parser.FileReader"/>
   </feature>
