@@ -21,6 +21,13 @@ if(title.contains("/")) {
 	}
 }
 
+if (src.startsWith("/C:")){
+	src = src.substring(1);
+}
+if (dest.startsWith("/C:")){
+	dest = dest.substring(1);
+}
+
 var task = project.createTask(macro);
  
 try {
