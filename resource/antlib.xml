@@ -19,14 +19,16 @@
 	<!--
 		Run a given macro against an input and output
 
-		@param macro - The name of a  macro to run.
-		@param src - A set of files
-		@param dest - The input directory
+		@param macro - A macro to run.
+		@param src - The source topic filename
+		@param dest - The destination topic filename
+		@param metadata - Topic metadata
 	-->
 	<scriptdef language="javascript" name="passthrough-task" src="${dita.plugin.fox.jason.passthrough.dir}/resource/execute-task.js">
 		<attribute name="macro" />
 		<attribute name="src" />
 		<attribute name="dest" />
+		<attribute name="metadata" />
 	</scriptdef>
 
 	<!--
@@ -109,9 +111,10 @@
 					<actions>
 						<local name="dest"/>
 						<local name="src"/>
+						<local name="metadata"/>
 						<property name="dest" value="${dita.temp.dir}${file.separator}@{path}"/>
 						<strip-prefix string="@{result}" to="src"/>
-						<passthrough-task src="${src}" dest="${dest}" macro="@{macro}"/>
+						<passthrough-task src="${src}" dest="${dest}" macro="@{macro}" metadata="${metadata}"/>
 					</actions>
 				</call>
 			</xmltask>

@@ -17,6 +17,7 @@
 		<attribute name="src" />
 		<attribute name="dest" />
 		<attribute name="title" />
+		 <attribute name="metadata"/>
 		<sequential>
 			<echo taskname="passthrough" level="info" message="Processing @{src}"/>
 			<copy taskname="passthrough" file="@{src}" tofile="@{dest}" overwrite="true"/>

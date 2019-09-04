@@ -110,6 +110,7 @@ The following `plugin.xml` will enable the post-processing of all files marked a
     <attribute name="src" />
     <attribute name="dest" />
     <attribute name="title" />
+    <attribute name="metadata"/>
     <sequential>
       <!-- Further processing -->
     </sequential>
