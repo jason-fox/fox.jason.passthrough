@@ -96,7 +96,7 @@
 									<local name="src"/>
 									<property name="dest" value="${dita.temp.dir}${file.separator}@{path}"/>
 									<strip-prefix string="@{result}" to="src"/>
-									<passthrough-task src="${src}" dest="${dest}" macro="@{macro}"/>
+									<passthrough-task src="${src}" dest="${dest}" macro="@{macro}" metadata="${metadata}"/>
 								</actions>
 							</call>
 						</xmltask>
