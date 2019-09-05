@@ -114,6 +114,7 @@
 						<local name="dest"/>
 						<local name="src"/>
 						<local name="metadata"/>
+						<get-metadata path="@{path}" property="metadata"/>
 						<property name="dest" value="${dita.temp.dir}${file.separator}@{path}"/>
 						<strip-prefix string="@{result}" to="src"/>
 						<passthrough-task src="${src}" dest="${dest}" macro="@{macro}" metadata="${metadata}"/>
