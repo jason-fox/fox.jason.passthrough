@@ -71,7 +71,7 @@ To mark a file as requiring no processing, label it with `format="passthrough"` 
 <!DOCTYPE bookmap PUBLIC "-//OASIS//DTD DITA BookMap//EN" "bookmap.dtd">
 <bookmap>
     ...etc
-    <mapref format="passthrough" href="sample.txt"/>
+    <chapter format="passthrough" href="sample.txt"/>
 </bookmap>
 ```
 
@@ -149,7 +149,7 @@ Post process all files of a given format using the macro supplied
 ```
 
 Files marked as `format="NEW_FORMAT"` should be processed by the `macrodef` called `do-something`. The macro must offer
-an interface with `src`, `dest` and `title` attributes.
+an interface with `src`, `dest`, `title` and `metadata` attributes.
 
 # License
 
