@@ -94,6 +94,8 @@
 								<actions>
 									<local name="dest"/>
 									<local name="src"/>
+									<local name="metadata"/>
+									<get-metadata path="@{path}" property="metadata"/>
 									<property name="dest" value="${dita.temp.dir}${file.separator}@{path}"/>
 									<strip-prefix string="@{result}" to="src"/>
 									<passthrough-task src="${src}" dest="${dest}" macro="@{macro}" metadata="${metadata}"/>
@@ -121,5 +123,35 @@
 		</sequential>
 	</macrodef>
 
+	<!--
+		Retrieve the metadata for the topic
 
+		@param path - The xpath to search
+		@param property - The output property to set (or blank if not found)
+	-->
+	<macrodef name="get-metadata">
+		<attribute name="path" />
+		<attribute name="property" />
+		<sequential>
+			<local name="metadata.file"/>
+			<tempfile deleteonexit="true" destdir="${dita.temp.dir}" 
+					property="metadata.file" suffix="xml"/>
+
+		    <xmltask taskname="check-metadata" source="${args.input}">
+		    	<xmlcatalog refid="dita.catalog"/>
+				<call path="//*[@href='@{path}']/topicmeta">
+					<actions>
+						<xmltask taskname="read-metadata" source="${args.input}" clearBuffers="b">
+							<xmlcatalog refid="dita.catalog"/>
+							<copy path="//*[@href='@{path}']/topicmeta" buffer="b" append="true"/>
+						</xmltask>
+						<xmltask sourcebuffer="b" dest="${metadata.file}"/>
+						<property name="@{property}" value="${metadata.file}"/>
+					</actions>
+				</call>
+			</xmltask>
+			<property name="@{property}" value=""/>
+
+		</sequential>
+	</macrodef>
 </antlib>
