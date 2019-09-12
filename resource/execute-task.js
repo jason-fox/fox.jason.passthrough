@@ -15,6 +15,7 @@ var src = attributes.get("src");
 var dest = attributes.get("dest");
 var title = attributes.get("src").replace(/_/g," ");
 var metadata = attributes.get("metadata");
+var regex= /^\/[a-z]:/i;
 
 if(title.contains("/")) {
 	title = title.substring(title.lastIndexOf("/") + 1, title.length());
@@ -23,10 +24,10 @@ if(title.contains("/")) {
 	}
 }
 
-if (src.startsWith("/C:")){
+if (regex.test(src)){
 	src = src.substring(1);
 }
-if (dest.startsWith("/C:")){
+if (regex.test(dest)){
 	dest = dest.substring(1);
 }
 
