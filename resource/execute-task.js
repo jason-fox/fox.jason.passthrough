@@ -34,8 +34,8 @@ if (regex.test(dest)){
 var task = project.createTask(macro);
  
 try {
-	task.setDynamicAttribute("src", src);
-	task.setDynamicAttribute("dest", dest);
+	task.setDynamicAttribute("src", decodeURIComponent(src));
+	task.setDynamicAttribute("dest", decodeURIComponent(dest));
 	task.setDynamicAttribute("title", title);
 	task.setDynamicAttribute("metadata", metadata);
 	task.execute();
