@@ -40,5 +40,5 @@ try {
 	task.setDynamicAttribute("metadata", metadata);
 	task.execute();
 } catch (err) {
-	task.log("Execution error: " + err.message);
+	throw(err);
 }

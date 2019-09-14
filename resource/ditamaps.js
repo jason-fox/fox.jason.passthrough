@@ -29,7 +29,7 @@ for (i = 0; i < filesets.size(); ++i) {
         task.setDynamicAttribute("format", format);
         task.execute();
       } catch (err) {
-        task.log("Execution error: " + err.message);
+        throw(err);
       }
     }
   }
