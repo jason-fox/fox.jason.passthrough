@@ -138,8 +138,12 @@
 			<tempfile deleteonexit="true" destdir="${dita.temp.dir}" 
 					property="metadata.file" suffix="xml"/>
 
-		    <xmltask unless:set="is_windows" taskname="check-metadata" source="${args.input}">
-		    	<xmlcatalog refid="dita.catalog"/>
+				<xmltask taskname="check-metadata" source="${args.input}">
+					<xmlcatalog unless:set="is_windows" refid="dita.catalog"/>
+					<xmlcatalog if:set="is_windows">
+						<dtd publicId="-//OASIS//DTD DITA Map//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
+						<dtd publicId="-//OASIS//DTD DITA BookMap//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
+					</xmlcatalog>
 				<call path="//*[@href='@{path}']/topicmeta">
 					<actions>
 						<xmltask taskname="read-metadata" source="${args.input}" clearBuffers="b">
