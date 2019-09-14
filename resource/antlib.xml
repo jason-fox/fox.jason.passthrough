@@ -138,7 +138,7 @@
 			<tempfile deleteonexit="true" destdir="${dita.temp.dir}" 
 					property="metadata.file" suffix="xml"/>
 
-		    <xmltask taskname="check-metadata" source="${args.input}">
+		    <xmltask unless:set="is_windows" taskname="check-metadata" source="${args.input}">
 		    	<xmlcatalog refid="dita.catalog"/>
 				<call path="//*[@href='@{path}']/topicmeta">
 					<actions>

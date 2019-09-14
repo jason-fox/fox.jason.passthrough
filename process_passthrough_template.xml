@@ -43,6 +43,10 @@
 		<fileset id="passthrough.ditamaps" dir="${dita.temp.dir}">
 			<include name="**/*.ditamap"/>
 		</fileset>
+
+		<condition property="is_windows">
+			<os family="windows"/>
+		</condition>
 	</target>
 
 	<!--
