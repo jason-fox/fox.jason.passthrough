@@ -3,7 +3,7 @@
 	This file is part of the DITA-OT Passthrough Plug-in project.
 	See the accompanying LICENSE file for applicable licenses.
 -->
-<project  name="fox.jason.passthrough" xmlns:dita="http://dita-ot.sourceforge.net">
+<project  name="fox.jason.passthrough" xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if">
 
 	<!--
 		Individual file processing for passthrough.
@@ -47,6 +47,12 @@
 		<condition property="is_windows">
 			<os family="windows"/>
 		</condition>
+
+		<xmlcatalog id="passthrough.dita.catalog" if:set="is_windows">
+			<dtd publicId="-//OASIS//DTD DITA Map//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
+			<dtd publicId="-//OASIS//DTD DITA BookMap//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
+		</xmlcatalog>
+
 	</target>
 
 	<!--

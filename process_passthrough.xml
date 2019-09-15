@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!--ant--><!--
 	This file is part of the DITA-OT Passthrough Plug-in project.
 	See the accompanying LICENSE file for applicable licenses.
---><project xmlns:dita="http://dita-ot.sourceforge.net" name="fox.jason.passthrough">
+--><project xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" name="fox.jason.passthrough">
 
 	<!--
 		Individual file processing for passthrough.
@@ -43,12 +43,18 @@
 		<condition property="is_windows">
 			<os family="windows"/>
 		</condition>
+
+		<xmlcatalog id="passthrough.dita.catalog" if:set="is_windows">
+			<dtd publicId="-//OASIS//DTD DITA Map//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
+			<dtd publicId="-//OASIS//DTD DITA BookMap//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
+		</xmlcatalog>
+
 	</target>
 
 	<!--
 		Extension hook for passthrough processing sub-classes to extend
 	-->
-	<target name="passthrough.extend" depends="swagger.process,passthrough.process,postman.process,pandoc.process"/>
+	<target name="passthrough.extend" depends="passthrough.process"/>
 
 	<!--
 		Passthrough processing starts after preprocess has completed.
