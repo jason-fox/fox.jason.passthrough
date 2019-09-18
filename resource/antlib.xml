@@ -124,11 +124,14 @@
 						<windows-job-result if:set="is_windows" to="result" string="${ditamap.dir}${file.separator}@{href}"/>
 
 
+						<echo level="verbose" message="looking for ${result}"/>
+
 						<xmltask taskname="read-job.xml" source="${dita.temp.dir}${file.separator}.job.xml">
 							<call path="//file[@result='${result}']">
 								<param default="" name="path" path="@path"/>
 								<param default="" name="result" path="@result"/>
 								<actions>
+									<echo level="verbose" message="FOUND"/>
 									<process-passthrough path="@{path}" result="@{result}" macro="@{macro}"/>
 								</actions>
 							</call>
