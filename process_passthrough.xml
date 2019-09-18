@@ -54,7 +54,7 @@
 	<!--
 		Extension hook for passthrough processing sub-classes to extend
 	-->
-	<target name="passthrough.extend" depends="passthrough.process"/>
+	<target name="passthrough.extend" depends="swagger.process,passthrough.process,postman.process,pandoc.process"/>
 
 	<!--
 		Passthrough processing starts after preprocess has completed.
