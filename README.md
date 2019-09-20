@@ -25,12 +25,12 @@ The plugin consists of a no-op file reader and an Antlib library. It offers two 
 
 </details>
 
-# Install
+## Install
 
 The DITA-OT Passthrough plug-in has been tested against [DITA-OT 3.x](http://www.dita-ot.org/download). It is
 recommended that you upgrade to the latest version.
 
-## Installing DITA-OT
+### Installing DITA-OT
 
 <a href="https://www.dita-ot.org"><img src="https://www.dita-ot.org/images/dita-ot-logo.svg" align="right" height="55"></a>
 
@@ -52,7 +52,7 @@ unzip -q dita-ot-3.3.4.zip
 rm dita-ot-3.3.4.zip
 ```
 
-## Installing the Plug-in
+### Installing the Plug-in
 
 -   Run the plug-in installation commands:
 
@@ -65,7 +65,7 @@ The `dita` command line tool requires no additional configuration.
 
 ---
 
-# Usage
+## Usage
 
 To mark a file as requiring no processing, label it with `format="passthrough"` within the `*.ditamap` as shown:
 
@@ -80,7 +80,7 @@ To mark a file as requiring no processing, label it with `format="passthrough"` 
 
 The additional file will be added to the build job without processing.
 
-## Extension points
+### Extension points
 
 This plug-in is designed to be extended and offers two extension points:
 
@@ -88,11 +88,11 @@ This plug-in is designed to be extended and offers two extension points:
 
 -   `passthrough.process` - Runs an additional Ant target as part of the passthrough processing stage.
 
-### Example
+#### Example
 
 The following `plugin.xml` will enable the post-processing of all files marked as `format=NEW_FORMAT`
 
-#### `plugin.xml` Configuration
+##### `plugin.xml` Configuration
 
 ```xml
 <plugin id="com.example.passthrough.dita">
@@ -104,7 +104,7 @@ The following `plugin.xml` will enable the post-processing of all files marked a
 </plugin>
 ```
 
-#### ANT build file
+##### ANT build file
 
 ```xml
 <project name="com.example.passthrough.dita">
@@ -128,11 +128,11 @@ The following `plugin.xml` will enable the post-processing of all files marked a
 A working example can be found in the [DITA-OT Pandoc plug-in](https://github.com/jason-fox/fox.jason.pandoc)
 repository.
 
-# API
+## API
 
 The following ANT task is available from the DITA-OT Pass through plug-in
 
-## Passthrough-Iterate
+### Passthrough-Iterate
 
 #### Description
 
@@ -154,7 +154,7 @@ Post process all files of a given format using the macro supplied
 Files marked as `format="NEW_FORMAT"` should be processed by the `macrodef` called `do-something`. The macro must offer
 an interface with `src`, `dest`, `title` and `metadata` attributes.
 
-# License
+## License
 
 [Apache 2.0](LICENSE) © 2019 Jason Fox
 
