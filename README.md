@@ -10,7 +10,8 @@ into the processing directory. It is designed to be extended.
 
 The plugin consists of a no-op file reader and an Antlib library. It offers two extension-points for further processing.
 
-# Table of Contents
+<details>
+<summary><strong>Table of Contents</strong></summary>
 
 -   [Install](#install)
     -   [Installing DITA-OT](#installing-dita-ot)
@@ -21,6 +22,8 @@ The plugin consists of a no-op file reader and an Antlib library. It offers two 
 -   [API](#api)
     -   [Passthrough-Iterate](#passthrough-iterate)
 -   [License](#license)
+
+</details>
 
 # Install
 
