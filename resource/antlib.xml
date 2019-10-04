@@ -125,6 +125,7 @@
 							<call path="//file[@result='${result}']">
 								<param default="" name="path" path="@path"/>
 								<param default="" name="result" path="@result"/>
+								<param default="" name="src" path="@src"/>
 								<param default="" name="uri" path="@uri"/>
 								<actions>
 									<process-passthrough path="@{path}" result="@{result}" macro="@{macro}"/>
@@ -135,6 +136,11 @@
 									<xmltask taskname="update-uri" source="${passthrough.job.file}" dest="${passthrough.job.file}">
 										<attr path="//file[@result='${result}' and @uri='@{uri}']" 
 												attr="uri" value="@{uri}.dita" /> 
+										<attr path="//file[@result='${result}' and @path='@{path}']" 
+												attr="path" value="@{path}.dita" /> 
+										<attr path="//file[@result='${result}' and @src='@{src}']" 
+												attr="src" value="@{src}.dita" /> 
+												
 									</xmltask>
 								</actions>
 							</call>
