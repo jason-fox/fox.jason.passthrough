@@ -119,18 +119,23 @@
 						<local name="ditamap.dir"/>
 						<strip-prefix string="@{xtrf}" to="ditamap"/>
 						<dirname property="ditamap.dir" file="${ditamap}"/>
-
 						<unix-job-result unless:set="is_windows" to="result" string="${ditamap.dir}${file.separator}@{href}"/>
 						<windows-job-result if:set="is_windows" to="result" string="${ditamap.dir}${file.separator}@{href}"/>
-
-
-						<xmltask taskname="read-job.xml" source="${dita.temp.dir}${file.separator}.job.xml">
+						<xmltask taskname="read-job.xml" source="${passthrough.job.file}">
 							<call path="//file[@result='${result}']">
 								<param default="" name="path" path="@path"/>
 								<param default="" name="result" path="@result"/>
+								<param default="" name="uri" path="@uri"/>
 								<actions>
-									
 									<process-passthrough path="@{path}" result="@{result}" macro="@{macro}"/>
+									<!-- For Multi-file transforms, ensure that the file suffix is dita -->
+									<local name="dest"/>
+									<property name="dest" value="${dita.temp.dir}${file.separator}@{path}"/>
+									<move taskname="file-rename" file="${dest}" tofile="${dest}.dita"/>
+									<xmltask taskname="update-uri" source="${passthrough.job.file}" dest="${passthrough.job.file}">
+										<attr path="//file[@result='${result}' and @uri='@{uri}']" 
+												attr="uri" value="@{uri}.dita" /> 
+									</xmltask>
 								</actions>
 							</call>
 						</xmltask>
