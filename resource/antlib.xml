@@ -66,11 +66,15 @@
 		<attribute name="macro" />
 		<sequential>
 
+			<local name="file.exists"/>
+
 			<ditamaps-passthrough dir="${dita.temp.dir}" format="@{format}" macro="@{macro}">
 				<fileset refid="passthrough.ditamaps" />
 			</ditamaps-passthrough>
 
-			<xmltask taskname="read-job.xml" source="${dita.temp.dir}${file.separator}.job.xml">
+			<available property="file.exists" file="${dita.temp.dir}${file.separator}.job.xml" type="file"/>
+
+			<xmltask if:set="file.exists" taskname="read-job.xml" source="${dita.temp.dir}${file.separator}.job.xml">
 				<call path="//file[@format='@{format}']">
 					<param default="" name="path" path="@path"/>
 					<param default="" name="result" path="@result"/>
