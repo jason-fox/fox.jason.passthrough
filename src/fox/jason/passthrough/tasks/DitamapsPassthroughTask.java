@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.types.FileSet;
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.taskdefs.MacroInstance;
@@ -40,7 +39,7 @@ public class DitamapsPassthroughTask extends Task {
 	 */
 	public DitamapsPassthroughTask() {
 		this.macro = null;
-		this.filesets = new ArrayList<FileSet>();
+		this.filesets = new ArrayList<>();
 		this.dir = null;
 		this.format = null;
 	}
@@ -85,7 +84,8 @@ public class DitamapsPassthroughTask extends Task {
      *
      * @throws BuildException if something goes wrong
      */
-    public void execute() throws BuildException {
+	@Override
+    public void execute() {
 		//	@param macro - A macro to run.
 		//	@param fileset - A set of files
 		//	@param dir - The input directory

@@ -1,15 +1,8 @@
 package fox.jason.passthrough.parser;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
-import java.lang.reflect.Constructor;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
@@ -47,6 +40,7 @@ public class FileReader implements XMLReader {
 
 	@Override
 	public void setFeature(String name, boolean value) throws SAXNotRecognizedException, SAXNotSupportedException {
+		// Not required for passthrough
 	}
 
 	@Override
@@ -56,6 +50,7 @@ public class FileReader implements XMLReader {
 
 	@Override
 	public void setProperty(String name, Object value) throws SAXNotRecognizedException, SAXNotSupportedException {
+		// Not required for passthrough
 	}
 
 	@Override
@@ -104,9 +99,9 @@ public class FileReader implements XMLReader {
 		URL url = new URL(input.getSystemId());
 		String name =  url.getPath().replaceAll("_", " ");
 		if(name.contains("/")) {
-			name = name.substring(name.lastIndexOf("/") + 1, name.length());
+			name = name.substring(name.lastIndexOf('/') + 1, name.length());
 			if(name.contains(".")) {
-				name = name.substring(0, name.lastIndexOf("."));
+				name = name.substring(0, name.lastIndexOf('.'));
 			}
 		}
 

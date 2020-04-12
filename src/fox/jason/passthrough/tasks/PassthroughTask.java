@@ -5,12 +5,10 @@
 
 package fox.jason.passthrough.tasks;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.taskdefs.MacroInstance;
 
@@ -80,16 +78,16 @@ public class PassthroughTask extends Task {
 		}
 		this.src = src;
 
-		String title = src.replaceAll("_"," ");
+		String rawTitle = src.replaceAll("_"," ");
 
-		if(title.contains("/")) {
-			title = title.substring(title.lastIndexOf("/") + 1, title.length());
-			if(title.contains(".")) {
-				title = title.substring(0, title.lastIndexOf("."));
+		if(rawTitle.contains("/")) {
+			rawTitle = rawTitle.substring(rawTitle.lastIndexOf('/') + 1, rawTitle.length());
+			if(rawTitle.contains(".")) {
+				rawTitle = rawTitle.substring(0, rawTitle.lastIndexOf("."));
 			}
 		}
 
-		this.title = title;
+		this.title = rawTitle;
 	}
 
 	/**
@@ -119,7 +117,8 @@ public class PassthroughTask extends Task {
      *
      * @throws BuildException if something goes wrong
      */
-    public void execute() throws BuildException {
+	@Override
+    public void execute() {
 		//	@param macro - A macro to run.
 		//	@param src - The source topic filename
 		//	@param dest - The destination topic filename

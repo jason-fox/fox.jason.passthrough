@@ -6,7 +6,6 @@
 package fox.jason.passthrough.tasks;
 
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 
 //
@@ -56,7 +55,8 @@ public class UnixJobXmlResultTask extends Task {
      *
      * @throws BuildException if something goes wrong
      */
-    public void execute() throws BuildException {
+	@Override
+    public void execute() {
 		//	@param  string -   The value to convert
 		//	@param  to -  The property to set
 		//
