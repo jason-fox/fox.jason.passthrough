@@ -13,65 +13,60 @@ import org.apache.tools.ant.Task;
 //
 
 public class WindowsJobXmlResultTask extends Task {
+  /**
+   * Field string.
+   */
+  private String string;
 
+  /**
+   * Field to.
+   */
+  private String to;
 
-	/**
-	 * Field string.
-	 */
-	private String string;
+  /**
+   * Creates a new <code>WindowsJobXmlResultTask</code> instance.
+   */
+  public WindowsJobXmlResultTask() {
+    super();
+    this.string = null;
+    this.to = null;
+  }
 
-	/**
-	 * Field to.
-	 */
-	private String to;
+  /**
+   * Method setString.
+   *
+   * @param string String
+   */
+  public void setString(String string) {
+    this.string = string;
+  }
 
-	/**
-	 * Creates a new <code>WindowsJobXmlResultTask</code> instance.
-	 */
-	public WindowsJobXmlResultTask() {
-		super();
-		this.string = null;
-		this.to = null;
-	}
+  /**
+   * Method setTo.
+   *
+   * @param to String
+   */
+  public void setTo(String to) {
+    this.to = to;
+  }
 
-
-
-	/**
-	 * Method setString.
-	 *
-	 * @param string String
-	 */
-	public void setString(String string) {
-		this.string = string;
-	}
-
-	/**
-	 * Method setTo.
-	 *
-	 * @param to String
-	 */
-	public void setTo(String to) {
-		this.to = to;
-	}
-
-	/**
-     * Method execute.
-     *
-     * @throws BuildException if something goes wrong
-     */
-	@Override
-    public void execute() {
-		//	@param  string -   The value to convert
-		//	@param  to -  The property to set
-		//
-        if (this.to == null) {
-            throw new BuildException("You must supply a value to convert");
-        }
-        if (this.string == null) {
-            throw new BuildException("You must supply a property to set");
-        }
-		getProject().setProperty(
-		  this.to, "file:/" + this.string.replaceAll("\\", "\\/")
-		);
-	}
+  /**
+   * Method execute.
+   *
+   * @throws BuildException if something goes wrong
+   */
+  @Override
+  public void execute() {
+    //	@param  string -   The value to convert
+    //	@param  to -  The property to set
+    //
+    if (this.to == null) {
+      throw new BuildException("You must supply a value to convert");
+    }
+    if (this.string == null) {
+      throw new BuildException("You must supply a property to set");
+    }
+    getProject()
+      .setProperty(this.to, "file:/" + this.string.replaceAll("\\", "\\/"));
+  }
 }

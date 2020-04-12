@@ -12,64 +12,63 @@ import org.apache.tools.ant.Task;
 //	Converts a value to relative path
 //
 public class RelativePathTask extends Task {
+  /**
+   * Field string.
+   */
+  private String src;
 
-	/**
-	 * Field string.
-	 */
-	private String src;
+  /**
+   * Field to.
+   */
+  private String to;
 
-	/**
-	 * Field to.
-	 */
-	private String to;
+  /**
+   * Creates a new <code>RelativePathTask</code> instance.
+   */
+  public RelativePathTask() {
+    super();
+    this.src = null;
+    this.to = null;
+  }
 
-	/**
-	 * Creates a new <code>RelativePathTask</code> instance.
-	 */
-	public RelativePathTask() {
-		super();
-		this.src = null;
-		this.to = null;
-	}
+  /**
+   * Method setSrc.
+   *
+   * @param src String
+   */
+  public void setSrc(String src) {
+    this.src = src;
+  }
 
-	/**
-	 * Method setSrc.
-	 *
-	 * @param src String
-	 */
-	public void setSrc(String src) {
-		this.src = src;
-	}
+  /**
+   * Method setTo.
+   *
+   * @param to String
+   */
+  public void setTo(String to) {
+    this.to = to;
+  }
 
-	/**
-	 * Method setTo.
-	 *
-	 * @param to String
-	 */
-	public void setTo(String to) {
-		this.to = to;
-	}
+  /**
+   * Method execute.
+   *
+   * @throws BuildException if something goes wrong
+   */
+  @Override
+  public void execute() {
+    //	@param  src -   The source to convert
+    //	@param  to -  The property to set
+    //
+    if (this.to == null) {
+      throw new BuildException("You must supply a property to set");
+    }
+    if (this.src == null) {
+      throw new BuildException("You must supply a source to convert");
+    }
 
-	/**
-     * Method execute.
-     *
-     * @throws BuildException if something goes wrong
-     */
-	@Override
-    public void execute() {
-		//	@param  src -   The source to convert
-		//	@param  to -  The property to set
-		//
-        if (this.to == null) {
-            throw new BuildException("You must supply a property to set");
-        }
-        if (this.src == null) {
-            throw new BuildException("You must supply a source to convert");
-        }
+    String temp = getProject().getProperty("args.input.dir");
+    String relative = this.src.replace(temp, "");
 
-		String temp = getProject().getProperty("args.input.dir");
-		String relative = this.src.replace(temp, "");
-
-		getProject().setProperty(this.to, relative);
-	}
+    getProject().setProperty(this.to, relative);
+  }
 }
