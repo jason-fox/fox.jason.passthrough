@@ -83,7 +83,7 @@ public class PassthroughTask extends Task {
 		if(rawTitle.contains("/")) {
 			rawTitle = rawTitle.substring(rawTitle.lastIndexOf('/') + 1, rawTitle.length());
 			if(rawTitle.contains(".")) {
-				rawTitle = rawTitle.substring(0, rawTitle.lastIndexOf("."));
+				rawTitle = rawTitle.substring(0, rawTitle.lastIndexOf('.'));
 			}
 		}
 
