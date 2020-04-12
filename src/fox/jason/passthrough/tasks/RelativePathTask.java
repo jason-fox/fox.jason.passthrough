@@ -9,15 +9,14 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
 //
-//	Converts a value to lower case
+//	Converts a value to relative path
 //
-
-public class StripPrefixTask extends Task {
+public class RelativePathTask extends Task {
 
 	/**
 	 * Field string.
 	 */
-	private String string;
+	private String src;
 
 	/**
 	 * Field to.
@@ -25,21 +24,21 @@ public class StripPrefixTask extends Task {
 	private String to;
 
 	/**
-	 * Creates a new <code>StripPrefixTask</code> instance.
+	 * Creates a new <code>RelativePathTask</code> instance.
 	 */
-	public StripPrefixTask() {
+	public RelativePathTask() {
 		super();
-		this.string = null;
+		this.src = null;
 		this.to = null;
 	}
 
 	/**
-	 * Method setString.
+	 * Method setSrc.
 	 *
-	 * @param string String
+	 * @param src String
 	 */
-	public void setString(String string) {
-		this.string = string;
+	public void setSrc(String src) {
+		this.src = src;
 	}
 
 	/**
@@ -58,15 +57,19 @@ public class StripPrefixTask extends Task {
      */
 	@Override
     public void execute() {
-		//	@param  string -   The value to convert
+		//	@param  src -   The source to convert
 		//	@param  to -  The property to set
 		//
         if (this.to == null) {
             throw new BuildException("You must supply a property to set");
         }
-        if (this.string == null) {
-            throw new BuildException("You must supply a value to convert");
+        if (this.src == null) {
+            throw new BuildException("You must supply a source to convert");
         }
-		getProject().setProperty(this.to, this.string.substring(5));
+
+		String temp = getProject().getProperty("args.input.dir");
+		String relative = this.src.replace(temp, "");
+
+		getProject().setProperty(this.to, relative);
 	}
 }

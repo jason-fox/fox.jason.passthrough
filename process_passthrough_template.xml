@@ -38,6 +38,9 @@
 	<target name="passthrough.init"
 		dita:depends="{passthrough.pre}"
 			dita:extension="depends org.dita.dost.platform.InsertDependsAction">
+		
+		<property name="passthrough.jar" value="${dita.plugin.fox.jason.passthrough.dir}/lib/passthrough-parser-2.0.jar"/>
+
 		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
 
 		<fileset id="passthrough.ditamaps" dir="${dita.temp.dir}">
