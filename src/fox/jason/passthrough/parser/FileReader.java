@@ -3,9 +3,12 @@ package fox.jason.passthrough.parser;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.transform.Source;
+import javax.xml.XMLConstants;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.DTDHandler;
 import org.xml.sax.EntityResolver;
@@ -117,13 +120,12 @@ public class FileReader implements XMLReader {
     //Delegate to content handler.
     SAXResult result = new SAXResult(handler);
     try {
-      TransformerFactory
-        .newInstance()
-        .newTransformer()
-        .transform(
-          new StreamSource(new StringReader(sb.toString()), url.toString()),
-          result
-        );
+      TransformerFactory factory = TransformerFactory.newInstance();
+      factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+      Source xslStream = new StreamSource(new StringReader(sb.toString()), url.toString());
+      Transformer transformer = factory.newTransformer();
+      transformer.transform(xslStream,result);
+
     } catch (Exception e) {
       throw new IOException(e);
     }
