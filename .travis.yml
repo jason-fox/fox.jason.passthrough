@@ -35,10 +35,11 @@ script:
 #  - dita-ot-$DITA_OT/bin/dita --input dita-ot-$DITA_OT/plugins/fox.jason.passthrough -f xsl-instrument
 
 after_success:
-  # - mvn -f dita-ot-$DITA_OT/plugins/fox.jason.unit-test/resource/pom.xml org.eluder.coveralls:coveralls-maven-plugin:report
-  - mvn compile
+  - mvn clean compile
+  #- cp dita-ot-$DITA_OT/plugins/fox.jason.unit-test/resource/pom.xml pom.xml
+  #- mvn org.eluder.coveralls:coveralls-maven-plugin:report
   - rm -rf dita-ot-$DITA_OT
-  - sonar-scanner 
+  - sonar-scanner
 
 
 

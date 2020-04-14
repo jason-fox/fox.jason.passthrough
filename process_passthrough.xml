@@ -33,10 +33,8 @@
 		Setting up passthrough processing. 
 		Load the library and set up the ditamap list
 	-->
-	<target name="passthrough.init" depends="swagger.process.pre,postman.process.pre,pandoc.check">
-
-		<property name="passthrough.jar" value="${dita.plugin.fox.jason.passthrough.dir}/lib/passthrough-parser-2.0.jar"/>
-
+	<target name="passthrough.init" depends="swagger.process.pre,doxygen.process.pre,postman.process.pre,pandoc.check,javadoc.process.pre">
+		
 		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
 
 		<fileset id="passthrough.ditamaps" dir="${dita.temp.dir}">
@@ -59,7 +57,7 @@
 	<!--
 		Extension hook for passthrough processing sub-classes to extend
 	-->
-	<target name="passthrough.extend" depends="swagger.process,passthrough.process,postman.process,pandoc.process"/>
+	<target name="passthrough.extend" depends="swagger.process,passthrough.process,doxygen.process,postman.process,pandoc.process,javadoc.process"/>
 
 	<!--
 		Passthrough processing starts after preprocess has completed.
