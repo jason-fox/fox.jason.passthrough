@@ -100,7 +100,7 @@ public class FileReader implements XMLReader {
   @Override
   public void parse(InputSource input) throws IOException, SAXException {
     URL url = new URL(input.getSystemId());
-    String name = url.getPath().replaceAll("_", " ");
+    String name = url.getPath().replace('_', ' ');
     if (name.contains("/")) {
       name = name.substring(name.lastIndexOf('/') + 1, name.length());
       if (name.contains(".")) {

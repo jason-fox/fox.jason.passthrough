@@ -77,7 +77,7 @@ public class PassthroughTask extends Task {
     }
     this.src = src;
 
-    String rawTitle = src.replaceAll("_", " ");
+    String rawTitle = src.replace('_', ' ');
 
     if (rawTitle.contains("/")) {
       rawTitle =
