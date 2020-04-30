@@ -6,8 +6,8 @@
 [![Documentation Status](https://readthedocs.org/projects/passthroughdita-ot/badge/?version=latest)](https://passthroughdita-ot.readthedocs.io/en/latest/?badge=latest)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fox.jason.passthrough&metric=alert_status)](https://sonarcloud.io/dashboard?id=fox.jason.passthrough)
 
-This is an abstract base [DITA-OT Plug-in](https://www.dita-ot.org/plugins) to enable files to bypass DITA-OT pre-processing and be copied directly over
-into the processing directory. It is designed to be extended.
+This is an abstract base [DITA-OT Plug-in](https://www.dita-ot.org/plugins) to enable files to bypass DITA-OT
+pre-processing and be copied directly over into the processing directory. It is designed to be extended.
 
 The plugin consists of a no-op file reader and an Antlib library. It offers two extension-points for further processing.
 
