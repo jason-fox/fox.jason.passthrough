@@ -15,7 +15,7 @@ addons:
       secure: "NCEuu7+QNFIXyLBJgU9sUAMxAYGhOubBYpKhCwjDXT7tHhpU2y3zk8fNCcU/utjwRnEC8EuZkYw4I19c+1n+HKKgIExNyjL4dmwaSRnloHl+MqWhdJNuSTTWmFhEZkVVO7UqRZfLI7+vwpmGj5E5/Sb95lvA8GZFsVtqM+KYqJM/73DSDvGPlNne+6bdXBghJRIYp3+6NChc11cszEE7fWOHtWXITq2rZHAfo0zrrC/zd9SWCUw8wL+37GCH0T/k/tu/wY8otx7HQTYF/K6F9kx7p5vNjMPfxeTAesKmJljOam7QwAjTp4hoeE4Httl4c2RFacgg0Upo68a5q5ObwO6e/b+ufK2uX+uedAm2asQe0qrQGFdZ/PqbY3tk7luabRD2oJPVfNx0/8dVqOEynh7xSaPD1UeMlz/PSCakhhfijTN+2QHEH+0uuyOn0gBuoHktLfpbB4VRmxEaqyQ5Zj6Oxu2Ulvk763Vfd4pcVYRDYI/6wzJWAnv9bEMQuAZj1fiOCnGc4IJlvOfStPD/yP1+y4o3aywf36YDRLSoawjrgcJVpEtxBLXRaQW5kWF191Z7zUxJA47dhjJU3UyIItDa8FptNlJK/KWo+8QRzNZ1WVzbLGMOmJkLW/P6Z2sM0W9mk96O2sOmVAE4mnN6+HcFB0EDcW03HUrmSu5IXaE="
 
 env:
-  - DITA_OT=3.4.1
+  - DITA_OT=3.5
 
 before_install:
   - zip -r fox.jason.passthrough.zip . -x *.zip* *.git/* *temp/* *out/*
@@ -24,9 +24,9 @@ before_install:
   - chmod +x dita-ot-$DITA_OT/bin/dita
 
 install:
-  - dita-ot-$DITA_OT/bin/dita --install https://github.com/jason-fox/fox.jason.unit-test/archive/master.zip
-  - dita-ot-$DITA_OT/bin/dita --install https://github.com/doctales/org.doctales.xmltask/archive/master.zip
-  - dita-ot-$DITA_OT/bin/dita --install fox.jason.passthrough.zip
+  - dita-ot-$DITA_OT/bin/dita install https://github.com/jason-fox/fox.jason.unit-test/archive/master.zip
+  - dita-ot-$DITA_OT/bin/dita install https://github.com/doctales/org.doctales.xmltask/archive/master.zip
+  - dita-ot-$DITA_OT/bin/dita install fox.jason.passthrough.zip
 
 script:
   - dita-ot-$DITA_OT/bin/dita --input dita-ot-$DITA_OT/plugins/fox.jason.passthrough -f unit-test --output . -v
