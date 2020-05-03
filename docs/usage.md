@@ -39,12 +39,13 @@ The following `plugin.xml` will enable the post-processing of all files marked a
 #### ANT build file
 
 ```xml
-<project name="com.example.passthrough.dita">
+<project name="com.exampmle.passthrough.dita">
 
   <macrodef name="do-something">
     <attribute name="src" />
     <attribute name="dest" />
     <attribute name="title" />
+    <attribute name="metadata" />  
     <sequential>
       <!-- Further processing -->
     </sequential>
