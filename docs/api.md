@@ -21,14 +21,23 @@ Post process all files of a given format using the macro supplied
  <passthrough-iterate format="NEW_FORMAT" macro="do-something"/>
 ```
 
-Files marked as `format="NEW_FORMAT"` should be processed by the `macrodef` called `do-something`. The macro must offer
-an interface with `src`, `dest` and `title` attributes.
+Files marked as `format="NEW_FORMAT"` should be processed by the `macrodef` called `do-something`. The macro must
+offer an interface with `src`, `dest`, `title` and `metadata` attributes. All attributes will be pre-supplied by 
+DITA-OT
+
+| Attribute | Description                                             | Required |
+| --------- | ------------------------------------------------------- | -------- |
+| src       | The name of the source file                             | Yes      |
+| dest      | The name of destination file within                     | Yes      |
+| title     | The title to use for the DITA topic                     | Yes      |
+| metadata  | Any addtional topic metadata to process (in XML format) | Yes      |
 
 ```xml
 <macrodef name="do-something">
     <attribute name="src" />
     <attribute name="dest" />
     <attribute name="title" />
+    <attribute name="metadata" />
     <sequential>
         <!-- Further processing -->
     </sequential>
