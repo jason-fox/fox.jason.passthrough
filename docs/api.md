@@ -27,8 +27,8 @@ DITA-OT
 
 | Attribute | Description                                             | Required |
 | --------- | ------------------------------------------------------- | -------- |
-| src       | The name of the source file                             | Yes      |
-| dest      | The name of destination file within                     | Yes      |
+| src       | The source file which holds the raw input format        | Yes      |
+| dest      | The destination file for the processed DITA             | Yes      |
 | title     | The title to use for the DITA topic                     | Yes      |
 | metadata  | Any addtional topic metadata to process (in XML format) | Yes      |
 
