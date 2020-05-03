@@ -25,12 +25,12 @@ Files marked as `format="NEW_FORMAT"` should be processed by the `macrodef` call
 offer an interface with `src`, `dest`, `title` and `metadata` attributes. All attributes will be pre-supplied by 
 DITA-OT
 
-| Attribute | Description                                             | Required |
-| --------- | ------------------------------------------------------- | -------- |
-| src       | The source file which holds the raw input format        | Yes      |
-| dest      | The destination file for the processed DITA             | Yes      |
-| title     | The title to use for the DITA topic                     | Yes      |
-| metadata  | Any addtional topic metadata to process (in XML format) | Yes      |
+| Attribute | Description                                              | Required |
+| --------- | -------------------------------------------------------- | -------- |
+| src       | The source file which holds the raw input format         | Yes      |
+| dest      | The destination file for the processed DITA              | Yes      |
+| title     | The title to use for the DITA topic                      | Yes      |
+| metadata  | Any additional topic metadata to process (in XML format) | Yes      |
 
 ```xml
 <macrodef name="do-something">
