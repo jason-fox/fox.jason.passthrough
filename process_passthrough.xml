@@ -46,8 +46,7 @@
 		</condition>
 
 		<xmlcatalog id="passthrough.dita.catalog" if:set="is_windows">
-			<dtd publicId="-//OASIS//DTD DITA Map//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
-			<dtd publicId="-//OASIS//DTD DITA BookMap//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
+			<catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
 		</xmlcatalog>
 
 		<property name="passthrough.job.file" value="${dita.temp.dir}${file.separator}.job.xml"/>

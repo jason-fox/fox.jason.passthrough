@@ -67,6 +67,6 @@ public class WindowsJobXmlResultTask extends Task {
       throw new BuildException("You must supply a property to set");
     }
     getProject()
-      .setProperty(this.to, "file:/" + this.string.replaceAll("\\", "\\/"));
+      .setProperty(this.to, "file:/" + this.string.replaceAll("\\\\", "\\/"));
   }
 }
