@@ -5,6 +5,7 @@
 
 package fox.jason.passthrough.tasks;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
@@ -140,17 +141,17 @@ public class PassthroughTask extends Task {
     try {
       task.setDynamicAttribute(
         "src",
-        URLDecoder.decode(this.src, StandardCharsets.UTF_8)
+        URLDecoder.decode(this.src, StandardCharsets.UTF_8.name())
       );
       task.setDynamicAttribute(
         "dest",
-        URLDecoder.decode(this.dest, StandardCharsets.UTF_8)
+        URLDecoder.decode(this.dest, StandardCharsets.UTF_8.name())
       );
       task.setDynamicAttribute("title", this.title);
       task.setDynamicAttribute("metadata", this.metadata);
       task.execute();
-    } catch (Exception err) {
-      throw (err);
+    } catch (UnsupportedEncodingException err){
+      throw new BuildException(err);
     }
   }
 }
