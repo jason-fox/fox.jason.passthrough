@@ -136,17 +136,21 @@ public class PassthroughTask extends Task {
       throw new BuildException("You must supply topic metadata");
     }
 
-    MacroInstance task = (MacroInstance) getProject().createTask(macro);
-
     try {
-      task.setDynamicAttribute(
-        "src",
-        URLDecoder.decode(this.src, StandardCharsets.UTF_8.name())
-      );
-      task.setDynamicAttribute(
-        "dest",
-        URLDecoder.decode(this.dest, StandardCharsets.UTF_8.name())
-      );
+      MacroInstance task = (MacroInstance) getProject().createTask(macro);
+      String source = URLDecoder.decode(this.src, StandardCharsets.UTF_8.name());
+      String target = URLDecoder.decode(this.dest, StandardCharsets.UTF_8.name());
+
+      if(source.startsWith("/")){
+        source = source.substring(1);
+      }
+
+      if(target.startsWith("/")){
+        target = target.substring(1);
+      }
+
+      task.setDynamicAttribute("src", source);
+      task.setDynamicAttribute("dest", target);
       task.setDynamicAttribute("title", this.title);
       task.setDynamicAttribute("metadata", this.metadata);
       task.execute();
