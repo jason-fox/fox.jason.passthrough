@@ -141,11 +141,11 @@ public class PassthroughTask extends Task {
       String source = URLDecoder.decode(this.src, StandardCharsets.UTF_8.name());
       String target = URLDecoder.decode(this.dest, StandardCharsets.UTF_8.name());
 
-      if(source.startsWith("/")){
+      if(source.contains(":") && source.startsWith("/")){
         source = source.substring(1);
       }
 
-      if(target.startsWith("/")){
+      if(target.contains(":") && target.startsWith("/")){
         target = target.substring(1);
       }
 
