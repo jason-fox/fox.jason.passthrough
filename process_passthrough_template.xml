@@ -31,6 +31,15 @@
 		<passthrough-iterate format="passthrough" macro="add-passthrough-file"/>
 	</target>
 
+	<target name="passthrough.check">
+		
+		<dita-ot-fail id="PASS001F">
+	      	<condition>
+	        	<equals arg1="${store-type}" arg2="memory"/>
+	      </condition>
+	    </dita-ot-fail>
+	</target>
+
 	<!--
 		Setting up passthrough processing. 
 		Load the library and set up the ditamap list
@@ -69,5 +78,5 @@
 	<!--
 		Passthrough processing starts after preprocess has completed.
 	-->
-	<target name="passthrough" depends="passthrough.init,passthrough.extend"/>
+	<target name="passthrough" depends="passthrough.check,passthrough.init,passthrough.extend"/>
 </project>

@@ -25,4 +25,6 @@
 
   <!-- Add a template file to enable overrides to use extension points -->
   <template file="process_passthrough_template.xml"/>
+  <!-- Ensure the plugin's error and logging messages are available -->
+  <feature extension="dita.xsl.messages" file="resource/messages.xml"/>
 </plugin>

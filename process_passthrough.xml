@@ -29,11 +29,20 @@
 		<passthrough-iterate format="passthrough" macro="add-passthrough-file"/>
 	</target>
 
+	<target name="passthrough.check">
+		
+		<dita-ot-fail id="PASS001F">
+	      	<condition>
+	        	<equals arg1="${store-type}" arg2="memory"/>
+	      </condition>
+	    </dita-ot-fail>
+	</target>
+
 	<!--
 		Setting up passthrough processing. 
 		Load the library and set up the ditamap list
 	-->
-	<target name="passthrough.init" depends="swagger.process.pre,doxygen.process.pre,postman.process.pre,pandoc.check,javadoc.process.pre">
+	<target name="passthrough.init" depends="swagger.process.pre,doxygen.process.pre,pandoc.check,javadoc.process.pre">
 		
 		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
 
@@ -58,10 +67,10 @@
 	<!--
 		Extension hook for passthrough processing sub-classes to extend
 	-->
-	<target name="passthrough.extend" depends="swagger.process,passthrough.process,doxygen.process,postman.process,pandoc.process,javadoc.process"/>
+	<target name="passthrough.extend" depends="swagger.process,passthrough.process,doxygen.process,pandoc.process,javadoc.process"/>
 
 	<!--
 		Passthrough processing starts after preprocess has completed.
 	-->
-	<target name="passthrough" depends="passthrough.init,passthrough.extend"/>
+	<target name="passthrough" depends="passthrough.check,passthrough.init,passthrough.extend"/>
 </project>
