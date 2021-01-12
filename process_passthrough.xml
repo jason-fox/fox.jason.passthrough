@@ -1,76 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><!--ant--><!--
+<?xml version="1.0" encoding="UTF-8"?><!--ant-->
+<!--
 	This file is part of the DITA-OT Passthrough Plug-in project.
 	See the accompanying LICENSE file for applicable licenses.
---><project xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" name="fox.jason.passthrough">
-
-	<!--
-		Individual file processing for passthrough.
-		Copy an input source into the dest location
-
-		@param src - The input file to copy over
-		@param dest - The output file location
-		@param title - The title of the converted file (not used)
-	-->
-	<macrodef name="add-passthrough-file">
-		<attribute name="src"/>
-		<attribute name="dest"/>
-		<attribute name="title"/>
-		 <attribute name="metadata"/>
-		<sequential>
-			<echo taskname="passthrough" level="info" message="Processing @{src}"/>
-			<copy taskname="passthrough" file="@{src}" tofile="@{dest}" overwrite="true"/>
-		</sequential>
-	</macrodef>
-
+-->
+<project name="fox.jason.passthrough" default="passthrough.process">
 	<!--
 		Iterate across all files marked format="passthrough" and process them
 	-->
 	<target name="passthrough.process">
-		<passthrough-iterate format="passthrough" macro="add-passthrough-file"/>
+		<copy file="${passthrough.input}" tofile="${passthrough.output}" overwrite="true"/>
 	</target>
-
-	<target name="passthrough.check">
-		
-		<dita-ot-fail id="PASS001F">
-	      	<condition>
-	        	<equals arg1="${store-type}" arg2="memory"/>
-	      </condition>
-	    </dita-ot-fail>
-	</target>
-
-	<!--
-		Setting up passthrough processing. 
-		Load the library and set up the ditamap list
-	-->
-	<target name="passthrough.init" depends="swagger.process.pre,doxygen.process.pre,pandoc.check,javadoc.process.pre">
-		
-		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
-
-		<fileset id="passthrough.ditamaps" dir="${dita.temp.dir}">
-			<include name="**/*.ditamap"/>
-		</fileset>
-
-		<condition property="is_windows">
-			<os family="windows"/>
-		</condition>
-
-		<xmlcatalog id="passthrough.dita.catalog" if:set="is_windows">
-			<catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
-			<dtd publicId="-//OASIS//DTD DITA Map//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
-			<dtd publicId="-//OASIS//DTD DITA BookMap//EN" location="${dita.plugin.fox.jason.passthrough.dir}/resource/fake.dtd"/>
-		</xmlcatalog>
-
-		<property name="passthrough.job.file" value="${dita.temp.dir}${file.separator}.job.xml"/>
-
-	</target>
-
-	<!--
-		Extension hook for passthrough processing sub-classes to extend
-	-->
-	<target name="passthrough.extend" depends="swagger.process,passthrough.process,doxygen.process,pandoc.process,javadoc.process"/>
-
-	<!--
-		Passthrough processing starts after preprocess has completed.
-	-->
-	<target name="passthrough" depends="passthrough.check,passthrough.init,passthrough.extend"/>
 </project>

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fox.jason</groupId>
 	<artifactId>passthrough.parser</artifactId>
-	<version>2.1</version>
+	<version>3.0</version>
 
 	<dependencies>
 		<dependency>
@@ -17,10 +17,10 @@
 		<sonar.projectKey>fox.jason.passthrough</sonar.projectKey>
 		<sonar.organization>dita-ot-plugins</sonar.organization>
 		<sonar.sources>src</sonar.sources>
-		<sonar.java.binaries>target/classes/fox/jason/passthrough/tasks,target/classes/fox/jason/passthrough/parser</sonar.java.binaries>
+		<sonar.java.binaries>target/classes/fox/jason/passthrough,target/classes/fox/jason/passthrough/tasks</sonar.java.binaries>
 		<sonar.java.libraries>lib/ant-*.jar</sonar.java.libraries>
 		<sonar.test.exclusions>test</sonar.test.exclusions>
-		<sonar.cpd.exclusions>src/fox/jason/passthrough/tasks/**</sonar.cpd.exclusions>  
+		<sonar.cpd.exclusions>src/fox/jason/passthrough/**</sonar.cpd.exclusions>  
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.flex.cobertura.reportPaths>coverage.xml</sonar.flex.cobertura.reportPaths>
 		<sonar.exclusions>coverage.html,test-results.html,pom.xml,coverage.xml</sonar.exclusions>

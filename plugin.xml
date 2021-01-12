@@ -6,25 +6,8 @@
 -->
 <plugin id="fox.jason.passthrough" version="3.1.0">
   <feature extension="ant.import" file="process_passthrough.xml"/>
-  <feature extension="dita.conductor.lib.import" file="lib/passthrough.parser-2.1.jar"/>
-  <!--
-		This plugin requires the XMLTask lib
-   -->
-  <require plugin="org.doctales.xmltask"/>
-  <!-- Uses the default depend.preprocess.post extension point -->
-  <feature extension="depend.preprocess.post" value="passthrough"/>
-  <!-- Uses the passthrough extension point and file reader -->
-  <feature extension="passthrough.process" value="passthrough.process"/>
+  <feature extension="dita.conductor.lib.import" file="lib/passthrough.parser-3.0.jar"/>
   <feature extension="dita.parser">
-    <parser format="passthrough" class="fox.jason.passthrough.parser.FileReader"/>
+    <parser format="passthrough" class="fox.jason.passthrough.PassthroughFileReader"/>
   </feature>
-  
-  <!-- Offers two additional extension points for dependent plug-ins -->
-  <extension-point id="passthrough.pre" name="Extend pass through pre-processing"/>
-  <extension-point id="passthrough.process" name="Extend pass through processing"/>
-
-  <!-- Add a template file to enable overrides to use extension points -->
-  <template file="process_passthrough_template.xml"/>
-  <!-- Ensure the plugin's error and logging messages are available -->
-  <feature extension="dita.xsl.messages" file="resource/messages.xml"/>
 </plugin>
