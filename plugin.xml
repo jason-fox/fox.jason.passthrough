@@ -5,7 +5,6 @@
   See the accompanying LICENSE file for applicable licenses.
 -->
 <plugin id="fox.jason.passthrough" version="3.1.0">
-  <feature extension="ant.import" file="process_passthrough.xml"/>
   <feature extension="dita.conductor.lib.import" file="lib/passthrough.parser-3.0.jar"/>
   <feature extension="dita.parser">
     <parser format="passthrough" class="fox.jason.passthrough.PassthroughFileReader"/>

@@ -1,16 +1,15 @@
 package fox.jason.passthrough;
 
+import java.io.File;
+import java.io.IOException;
+
 public class PassthroughFileReader extends AbstractFileReader {
 
-  private static final String ANT_FILE = "/../process_passthrough.xml";
+  public PassthroughFileReader() {}
 
   @Override
-  protected String getAntFile(){
-    String path =  this.getJarFile().getParent();
-    return path + ANT_FILE;
-  }
-  
-  public PassthroughFileReader() {
-    super(PassthroughFileReader.class);
+  protected String runTarget(File inputFile, String title)
+    throws IOException {
+    return readResultFile(inputFile);
   }
 }

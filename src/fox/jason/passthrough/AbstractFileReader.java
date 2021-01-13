@@ -1,19 +1,22 @@
 package fox.jason.passthrough;
 
-import java.io.StringReader;
-import java.io.Reader;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import javax.xml.XMLConstants;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.transform.Source;
-import javax.xml.XMLConstants;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.DTDHandler;
 import org.xml.sax.EntityResolver;
@@ -24,15 +27,8 @@ import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
 import org.xml.sax.XMLReader;
 
-import java.nio.file.StandardCopyOption;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.Path;
-import java.net.URISyntaxException;
-
-import fox.jason.passthrough.AntExecutor;
-
 public abstract class AbstractFileReader implements XMLReader {
+
   /**
    * Entity resolver
    */
@@ -46,25 +42,7 @@ public abstract class AbstractFileReader implements XMLReader {
    */
   private ErrorHandler errorHandler;
 
-  /**
-   * Field file.
-   */
-  private File jarFile;
-
-  public AbstractFileReader(Class clazz) {
-    super();
-
-    String path = clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
-    try {
-      this.jarFile =new File(URLDecoder.decode(path, "UTF-8"));
-    } catch (UnsupportedEncodingException e ){
-      this.jarFile = null;
-    }
-  }
-
-   protected File getJarFile(){
-     return jarFile;
-   }
+  public AbstractFileReader() {}
 
   @Override
   public boolean getFeature(String name)
@@ -144,47 +122,39 @@ public abstract class AbstractFileReader implements XMLReader {
     } else {
       suffix = title;
     }
-    
+
     try {
       File srcFile = File.createTempFile("src", suffix);
       srcFile.deleteOnExit();
       writeSourceToFile(url.toURI(), srcFile);
-      String dita = executeAntTask(srcFile, title);
+      String dita = runTarget(srcFile, title);
 
       //Delegate to content handler.
       SAXResult result = new SAXResult(handler);
       try {
         TransformerFactory factory = TransformerFactory.newInstance();
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-        Source xslStream = new StreamSource(new StringReader(dita), url.toString());
+        Source xslStream = new StreamSource(
+          new StringReader(dita),
+          url.toString()
+        );
         Transformer transformer = factory.newTransformer();
-        transformer.transform(xslStream,result);
-
+        transformer.transform(xslStream, result);
       } catch (Exception e) {
         throw new IOException(e);
       }
-
-    } catch (URISyntaxException e){
+    } catch (URISyntaxException e) {
       throw new IOException(e);
-    }  
+    }
   }
-
-  protected abstract String getAntFile();
 
   @Override
   public void parse(String systemId) throws IOException, SAXException {
     parse(new InputSource(systemId));
   }
-  protected String fileAsString( File output) throws IOException {
-    return new String(Files.readAllBytes(Paths.get(output.getPath())), java.nio.charset.StandardCharsets.UTF_8);
-  }
 
-  protected String executeAntTask(File passthroughInputFile, String title) throws IOException {
-    File resultFile = File.createTempFile("dest", null);
-    resultFile.deleteOnExit();
-    AntExecutor.executeAntTask(getAntFile(), passthroughInputFile, resultFile, title);
-    return fileAsString(resultFile);
-  }
+  protected abstract String runTarget(File inputFile, String title)
+    throws IOException;
 
   protected void writeSourceToFile(URI uri, File copy) throws IOException {
     File original = new File(uri);
@@ -193,4 +163,14 @@ public abstract class AbstractFileReader implements XMLReader {
     Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
   }
 
+  protected String readResultFile(File output) throws IOException {
+    return new String(
+      Files.readAllBytes(Paths.get(output.getPath())),
+      java.nio.charset.StandardCharsets.UTF_8
+    );
+  }
+
+  protected void writeToFile (String contents, File file) throws IOException {
+    Files.write(Paths.get(file.getPath()), contents.getBytes());
+  }
 }
