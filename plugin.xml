@@ -4,8 +4,8 @@
   This file is part of the DITA-OT Passthrough Plug-in project.
   See the accompanying LICENSE file for applicable licenses.
 -->
-<plugin id="fox.jason.passthrough" version="3.1.0">
-  <feature extension="dita.conductor.lib.import" file="lib/passthrough.parser-3.0.jar"/>
+<plugin id="fox.jason.passthrough" version="4.0.0">
+  <feature extension="dita.conductor.lib.import" file="lib/passthrough.parser-4.0.jar"/>
   <feature extension="dita.parser">
     <parser format="passthrough" class="fox.jason.passthrough.PassthroughFileReader"/>
   </feature>
