@@ -34,5 +34,3 @@ jobs:
         with:
           dita-ot-version: 3.6
           plugin: 'fox.jason.passthrough'
-        env:
-          COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
