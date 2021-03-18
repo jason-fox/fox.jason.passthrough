@@ -1,13 +1,11 @@
 site_name: Pass Through Plugin for DITA-OT
-
-repo_url: https://github.com/jason-fox/fox.jason.passthrough
+repo_url: 'https://github.com/jason-fox/fox.jason.passthrough'
 repo_name: GitHub
-
 pages:
-    -  Home: index.md
-    - 'Install' : 'install.md'
-    - 'Usage' : 'usage.md'
-    - 'ANT Task' : 'api.md'
-
+  - Home: index.md
+  - Install: install.md
+  - Usage: usage.md
+  - ANT Task: api.md
 theme: readthedocs
-extra_css: ["https://jason-fox.github.io/fox.jason.passthrough/dita.css"]
+extra_css:
+  - 'https://jason-fox.github.io/fox.jason.passthrough/dita.css'
