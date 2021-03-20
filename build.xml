@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!--ant-->
+<!--
+  This file is part of the DITA passthrough project.
+  See the accompanying LICENSE file for applicable licenses.
+-->
+<project name="fox.jason.passthrough">
+
+	<!--
+		Ant target executed to convert passthrough files to DITA
+	-->
+	<target name="dita2passthrough-convert" depends="build-init,
+                   preprocess">
+    <makeurl property="output.dir.uri" file="${output.dir}"/>
+    <!--pipeline message="Normalize DITA files" taskname="normalize"-->
+      <xslt in="${dita.temp.dir}/.job.xml" out="${dita.temp.dir}/.job.xml.temp"
+            style="${dita.plugin.fox.jason.passthrough.dir}/xsl/passthrough.xsl"
+            taskname="normalize">
+        <param name="output.dir.uri" expression="${output.dir.uri}"/>
+        <xmlcatalog refid="dita.catalog"/>
+      </xslt>
+    <!--/pipeline-->
+    <delete file="${dita.temp.dir}/.job.xml.temp"/>
+	</target>
+
+</project>
