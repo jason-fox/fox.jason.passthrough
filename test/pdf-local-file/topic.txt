@@ -1,0 +1,1 @@
+<topic id="sample" class="- topic/topic "><title class="- topic/title ">Test!</title><body class="- topic/body "><p class="- topic/p ">This is a test</p></body></topic>
