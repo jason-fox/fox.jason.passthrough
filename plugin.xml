@@ -9,9 +9,15 @@
 		This plugin is based on and 'extends' the plugin named below.
 	-->
   <require plugin="org.dita.normalize"/>
-  <feature extension="dita.conductor.lib.import" file="lib/passthrough.parser-4.0.jar"/>
+  <feature
+    extension="dita.conductor.lib.import"
+    file="lib/passthrough.parser-4.0.jar"
+  />
   <feature extension="dita.parser">
-    <parser format="passthrough" class="fox.jason.passthrough.PassthroughFileReader"/>
+    <parser
+      format="passthrough"
+      class="fox.jason.passthrough.PassthroughFileReader"
+    />
   </feature>
   <transtype name="passthrough-convert" desc="Passthrough Normalized DITA"/>
   <feature extension="ant.import" file="build.xml"/>
