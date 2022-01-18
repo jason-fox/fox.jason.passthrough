@@ -156,4 +156,4 @@ an interface with `src`, `dest`, `title` and `metadata` attributes.
 
 ## License
 
-[Apache 2.0](LICENSE) © 2019 - 2021 Jason Fox
+[Apache 2.0](LICENSE) © 2019 - 2022 Jason Fox
