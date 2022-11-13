@@ -3,7 +3,6 @@
 [![license](https://img.shields.io/github/license/jason-fox/fox.jason.passthrough.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![DITA-OT 4.0](https://img.shields.io/badge/DITA--OT-4.0-green.svg)](http://www.dita-ot.org/4.0)
 [![CI](https://github.com/jason-fox/fox.jason.passthrough/workflows/CI/badge.svg)](https://github.com/jason-fox/fox.jason.passthrough/actions?query=workflow%3ACI)
-[![Documentation Status](https://readthedocs.org/projects/passthroughdita-ot/badge/?version=latest)](https://passthroughdita-ot.readthedocs.io/en/latest/?badge=latest)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fox.jason.passthrough&metric=alert_status)](https://sonarcloud.io/dashboard?id=fox.jason.passthrough)
 
 This is an abstract base [DITA-OT Plug-in](https://www.dita-ot.org/plugins) to enable files to bypass DITA-OT
