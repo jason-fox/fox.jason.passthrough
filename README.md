@@ -153,6 +153,37 @@ Post process all files of a given format using the macro supplied
 Files marked as `format="NEW_FORMAT"` should be processed by the `macrodef` called `do-something`. The macro must offer
 an interface with `src`, `dest`, `title` and `metadata` attributes.
 
+### MarkdownDita
+
+`fox.jason.passthrough.markdown.MarkdownDita` parses a CommonMark string with
+[flexmark](https://github.com/vsch/flexmark-java) and renders it straight to DITA - headings, paragraphs, lists,
+code spans/blocks, tables, links and images become `<section>`/`<p>`/`<ul>`/`<codeph>`/`<codeblock>`/`<table>`/
+`<xref>`/`<fig>` respectively. It's shared by every `fox.jason.passthrough.*` plugin whose source format allows
+Markdown in free-text fields (Postman collection descriptions, OpenAPI/Swagger `description` fields, etc.) instead
+of each plugin carrying its own copy.
+
+Downstream plugins only need three entry points, none of which expose flexmark types:
+
+```java
+MarkdownDita.renderBlocks(markdown);     // full block support - paragraphs, lists, code, tables
+MarkdownDita.renderInlineOnly(markdown); // one inline run, no <p> wrapper - for table cells etc.
+MarkdownDita.esc(text);                  // plain XML-escaping, no markdown parsing
+```
+
+For finer control over heading-to-section promotion, `MarkdownDita.parse(markdown)` and `MarkdownDita.walk(document,
+sink)` expose the underlying flexmark `Node` tree and a `BlockSink` callback (heading vs. content blocks) - see
+`fox.jason.passthrough.postman`'s `PostmanConverter` for a working example.
+
+A consuming plugin must vendor the flexmark jars this depends on in its own `lib/` and declare them via its own
+`plugin.xml` `dita.conductor.lib.import` features (see `fox.jason.passthrough.postman/plugin.xml`) - DITA-OT's
+conductor classpath is flat across installed plugins, but each plugin still needs to be independently installable.
+
 ## License
 
-[Apache 2.0](LICENSE) © 2019 - 2024 Jason Fox
+[Apache 2.0](LICENSE) © 2019 - 2026 Jason Fox
+
+The Program includes the following additional software components which were obtained under license. See
+[NOTICES.txt](NOTICES.txt) for the full text of each license.
+
+-   flexmark and its flexmark-util/flexmark-ext-tables dependencies -
+    https://github.com/vsch/flexmark-java - **BSD 2-Clause license**
