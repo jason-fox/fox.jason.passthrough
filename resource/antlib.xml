@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--ant-->
+<!--
+  This file is part of the DITA-OT Passthrough Plug-in project.
+  See the accompanying LICENSE file for applicable licenses.
+-->
+<antlib xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+  <!--
+    Bridges an Ant property to a JVM system property
+
+    @param  name -   The system property key to set
+    @param  value -  The value to set it to
+  -->
+  <taskdef
+    classname="fox.jason.passthrough.tasks.PublishSystemPropertyTask"
+    name="publish-system-property"
+    onerror="ignore"
+  />
+
+</antlib>

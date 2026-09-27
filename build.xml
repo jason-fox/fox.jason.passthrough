@@ -6,6 +6,11 @@
 -->
 <project name="fox.jason.passthrough">
 
+	<target name="passthrough.lang.init">
+		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
+		<publish-system-property name="default.language" value="${default.language}"/>
+	</target>
+
 	<!--
 		Ant target executed to convert passthrough files to DITA
 	-->

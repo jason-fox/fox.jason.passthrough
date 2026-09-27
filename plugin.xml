@@ -36,4 +36,5 @@
   </feature>
   <transtype name="passthrough-convert" desc="Passthrough Normalized DITA"/>
   <feature extension="ant.import" file="build.xml"/>
+  <feature extension="depend.preprocess.pre" value="passthrough.lang.init"/>
 </plugin>

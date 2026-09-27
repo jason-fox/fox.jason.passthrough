@@ -182,4 +182,8 @@ public abstract class AbstractFileReader implements XMLReader {
   protected void writeToFile(String contents, File file) throws IOException {
     Files.write(Paths.get(file.getPath()), contents.getBytes());
   }
+
+  protected static String getDefaultLanguage() {
+    return System.getProperty("default.language", "en");
+  }
 }
