@@ -4,14 +4,14 @@
   This file is part of the DITA-OT Passthrough Plug-in project.
   See the accompanying LICENSE file for applicable licenses.
 -->
-<plugin id="fox.jason.passthrough" version="4.1.0">
+<plugin id="fox.jason.passthrough" version="5.0.0">
   <!--
 		This plugin is based on and 'extends' the plugin named below.
 	-->
   <require plugin="org.dita.normalize"/>
   <feature
     extension="dita.conductor.lib.import"
-    file="lib/passthrough.parser-4.0.jar"
+    file="lib/passthrough.parser-5.0.jar"
   />
   <feature extension="dita.parser">
     <parser

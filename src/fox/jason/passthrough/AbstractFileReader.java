@@ -2,7 +2,6 @@ package fox.jason.passthrough;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -42,29 +41,30 @@ public abstract class AbstractFileReader implements XMLReader {
    */
   private ErrorHandler errorHandler;
 
-  public AbstractFileReader() {}
+  public AbstractFileReader() {
+  }
 
   @Override
   public boolean getFeature(String name)
-    throws SAXNotRecognizedException, SAXNotSupportedException {
+      throws SAXNotRecognizedException, SAXNotSupportedException {
     return false;
   }
 
   @Override
   public void setFeature(String name, boolean value)
-    throws SAXNotRecognizedException, SAXNotSupportedException {
+      throws SAXNotRecognizedException, SAXNotSupportedException {
     // Not required for passthrough
   }
 
   @Override
   public Object getProperty(String name)
-    throws SAXNotRecognizedException, SAXNotSupportedException {
+      throws SAXNotRecognizedException, SAXNotSupportedException {
     return null;
   }
 
   @Override
   public void setProperty(String name, Object value)
-    throws SAXNotRecognizedException, SAXNotSupportedException {
+      throws SAXNotRecognizedException, SAXNotSupportedException {
     // Not required for passthrough
   }
 
@@ -126,18 +126,18 @@ public abstract class AbstractFileReader implements XMLReader {
     try {
       File srcFile = File.createTempFile("src", suffix);
       srcFile.deleteOnExit();
-      writeSourceToFile(url.toURI(), srcFile);
-      String dita = runTarget(srcFile, title);
+      URI sourceUri = url.toURI();
+      writeSourceToFile(sourceUri, srcFile);
+      String dita = runTarget(srcFile, title, sourceUri);
 
-      //Delegate to content handler.
+      // Delegate to content handler.
       SAXResult result = new SAXResult(handler);
       try {
         TransformerFactory factory = TransformerFactory.newInstance();
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         Source xslStream = new StreamSource(
-          new StringReader(dita),
-          url.toString()
-        );
+            new StringReader(dita),
+            url.toString());
         Transformer transformer = factory.newTransformer();
         transformer.transform(xslStream, result);
       } catch (Exception e) {
@@ -154,7 +154,17 @@ public abstract class AbstractFileReader implements XMLReader {
   }
 
   protected abstract String runTarget(File inputFile, String title)
-    throws IOException;
+      throws IOException;
+
+  /**
+   * Same as {@link #runTarget(File, String)}, with the original (pre-copy) source location for
+   * readers that need to emit a resource reference resolvable relative to the source directory
+   * (e.g. an {@code object/@data} the DITA-OT job's file-copy scan can pick up). Defaults to the
+   * two-argument form so existing readers are unaffected.
+   */
+  protected String runTarget(File inputFile, String title, URI sourceUri) throws IOException {
+    return runTarget(inputFile, title);
+  }
 
   protected void writeSourceToFile(URI uri, File copy) throws IOException {
     File original = new File(uri);
@@ -165,12 +175,11 @@ public abstract class AbstractFileReader implements XMLReader {
 
   protected String readResultFile(File output) throws IOException {
     return new String(
-      Files.readAllBytes(Paths.get(output.getPath())),
-      java.nio.charset.StandardCharsets.UTF_8
-    );
+        Files.readAllBytes(Paths.get(output.getPath())),
+        java.nio.charset.StandardCharsets.UTF_8);
   }
 
-  protected void writeToFile (String contents, File file) throws IOException {
+  protected void writeToFile(String contents, File file) throws IOException {
     Files.write(Paths.get(file.getPath()), contents.getBytes());
   }
 }
