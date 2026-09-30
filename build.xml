@@ -6,9 +6,13 @@
 -->
 <project name="fox.jason.passthrough">
 
-	<target name="passthrough.lang.init">
+	<target name="passthrough.init" xmlns:if="ant:if">
 		<typedef file="${dita.plugin.fox.jason.passthrough.dir}/resource/antlib.xml"/>
 		<publish-system-property name="default.language" value="${default.language}"/>
+		<publish-system-property name="dita.temp.dir" value="${dita.temp.dir}"/>
+		<dirname property="passthrough.input.dir" file="${args.input}"/>
+		<publish-system-property name="passthrough.input.dir" value="${passthrough.input.dir}"/>
+		<publish-system-property if:set="passthrough.spec.keep" name="passthrough.spec.keep" value="${passthrough.spec.keep}"/>
 	</target>
 
 	<!--
